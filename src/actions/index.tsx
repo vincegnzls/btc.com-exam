@@ -30,7 +30,6 @@ export const fetchCurPriceData = (): ThunkAction<void, RootState, unknown, AnyAc
   async (dispatch) => {
     axios.get('https://index-api.bitcoin.com/api/v0/cash/price/usd').then(res => {
       if (res.status === 200) {
-        // console.log('fetchCurPriceData', res.data)
         const data = res.data
         dispatch(setCurPrice({curPrice: data}))
       }
@@ -45,7 +44,6 @@ export const fetchNewsData = (): ThunkAction<void, RootState, unknown, AnyAction
 
     axios.get('https://news.bitcoin.com/feed/').then(res => {
       const newsData: any = convert.xml2js(res.data, {compact: true})
-      console.log(newsData.rss.channel)
     
       if (res.status === 200) {
         dispatch(successFetchNews({data: newsData.rss.channel}))
