@@ -36,7 +36,7 @@ const Home: NextPage = () => {
 
         return filteredNews.map(news => (
           <div>
-            <h2><Link href={news.link._text}><a target="_blank">{news.title._text}</a></Link></h2> Posted: {moment(news.pubDate._text).format('MMM DD, yyyy')}
+            <h2><Link href={news.link._text}><a target="_blank">{news.title._text}</a></Link></h2> Posted: {moment(news.pubDate._text).format('MMM DD, yyyy @ h:mm a')}
             <hr/>
           </div>
         ))
