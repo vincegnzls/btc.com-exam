@@ -10,7 +10,9 @@ type PriceData = {
 
 interface PriceChartProps {
   data: PriceData[]
-  dataKey: string
+  dataKey: string,
+  xDataKey: string,
+  yDataKey: string
 }
 
 const PriceChart: React.FC<PriceChartProps> = props => {
@@ -25,8 +27,8 @@ const PriceChart: React.FC<PriceChartProps> = props => {
   return (
     <ResponsiveContainer width="80%" height={400}>
       <LineChart width={400} height={400} data={formatData()}>
-        <XAxis dataKey="date" />
-        <YAxis dataKey="price" />
+        <XAxis dataKey={props.xDataKey} />
+        <YAxis dataKey={props.yDataKey} />
         <Line type="monotone" dataKey={props.dataKey} stroke="#8884d8" />
       </LineChart>
     </ResponsiveContainer>

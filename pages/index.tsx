@@ -2,13 +2,15 @@ import type { NextPage } from 'next'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Head from 'next/head'
+import Link from 'next/link'
+import moment from 'moment'
+
 import PriceChart from '../src/components/PriceChart'
-import styles from '../styles/Home.module.css'
+import { GraphViewButton } from '../src/components/GraphViewButton'
 import { fetchCurPriceData, fetchNewsData, fetchPriceData } from '../src/actions'
 import { RootState } from '../src/store'
 import { updateGraphDays } from '../src/reducers/price'
-import Link from 'next/link'
-import moment from 'moment'
+import styles from '../styles/Home.module.css'
 
 const Home: NextPage = () => {
   const fetching = useSelector((state: RootState) => state.price.fetching);
@@ -61,11 +63,11 @@ const Home: NextPage = () => {
       </main>
 
       <div className={styles.main}>
-        {fetching ? <p>Loading data...</p> : priceData.length ? <PriceChart data={priceData} dataKey="price" /> : null}
+        {fetching ? <p>Loading data...</p> : priceData.length ? <PriceChart data={priceData} xDataKey="date" yDataKey="price" dataKey="price" /> : null}
         <div style={{paddingTop: '1rem'}}>
-          <button type="button" className='graph-view-btn' onClick={() => dispatch(updateGraphDays({graphDays: 2}))}>24 hour</button>
-          <button type="button" className='graph-view-btn' onClick={() => dispatch(updateGraphDays({graphDays: 7}))}>7 days</button>
-          <button type="button" className='graph-view-btn' onClick={() => dispatch(updateGraphDays({graphDays: 30}))}>1 month</button>
+          <GraphViewButton text='24 Hours' backgroundColor='#0070f3' onClick={() => dispatch(updateGraphDays({graphDays: 2}))} />
+          <GraphViewButton text='7 Days' backgroundColor='#0070f3' onClick={() => dispatch(updateGraphDays({graphDays: 7}))} />
+          <GraphViewButton text='1 Month' backgroundColor='#0070f3' onClick={() => dispatch(updateGraphDays({graphDays: 30}))} />
         </div>
       </div>
 
